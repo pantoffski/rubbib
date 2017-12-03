@@ -1,7 +1,7 @@
 <template>
 <div id='mainPage'>
-  <div class='aRunner' v-for="(runner,index) in runners" :index='index'>
-    <span>{{sex(runner)}}</span> <span>{{bibNo(runner)}} : {{runner.name}}</span>
+  <div :style='aRunnerStyle()' class='aRunner' v-for="(runner,index) in runners" :index='index'>
+    <span>{{sex(runner)}}{{bibNo(runner)}} :</span> <span> {{runner.name}}</span>
   </div>
 </div>
 </template>
@@ -14,12 +14,17 @@ import {
 export default {
   name: 'mainPage',
   data() {
-    return {
-      sortIdx: 0,
-      di: -1
-    }
+    return {}
   },
   methods: {
+    aRunnerStyle() {
+      var h = (200 / this.runnersLength);
+      console.log(h);
+      return {
+        height: h + 'vh',
+        'line-height': h + 'vh'
+      }
+    },
     sex(runner) {
       return runner.raceCat.slice(-1).toUpperCase()
     },
@@ -28,31 +33,45 @@ export default {
     }
   },
   computed: {
-    ...mapState(['runners'])
+    ...mapState(['runners', 'runnersLength'])
   }
 }
 </script>
 <style lang="less">
+@bibWidth: 250px;
 @font-face {
     font-family: 'mono';
     src: url("./../css/mono.ttf");
 }
 #mainPage {
     column-count: 2;
-    column-gap: 6vw;
+    column-gap: 1vw;
     display: block;
     overflow: hidden;
     box-sizing: border-box;
-    padding: 10px;
     font-family: 'mono';
+    font-size: 40px;
     .aRunner {
+    position:relative;
+        span {
+            display: inline-block;
+            position:absolute;
+        }
         display: block;
         height: 60px;
-        width:47vw;
+        width: 49.5vw;
         span:nth-of-type(1) {
-            width: 40px;
+            width: ~"calc(@{bibWidth} - 5px)";
             display: inline-block;
-            text-align: right;
+            text-align: left;
+            padding-left:5px;
+        }
+        span:nth-of-type(2) {
+            left:@bibWidth;
+            width: ~"calc(50vw - @{bibWidth})";
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
         }
     }
 }
