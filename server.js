@@ -138,7 +138,7 @@ new CronJob({
   cronTime: '* * * * * *',
   onTick: function () {
     var now = new Date().getTime();
-    if ((now - lastBeat) > 2000) {
+    if ((now - lastBeat) > 3000) {
       beep();
       console.log(rxBuff.length);
       process.exit(1);
