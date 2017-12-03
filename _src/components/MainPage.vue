@@ -38,12 +38,14 @@ export default {
 }
 </script>
 <style lang="less">
+@import "./../css/config.less";
 @bibWidth: 250px;
 @font-face {
     font-family: 'mono';
     src: url("./../css/mono.ttf");
 }
 #mainPage {
+    color: @txtColor;
     column-count: 2;
     column-gap: 1vw;
     display: block;
@@ -52,22 +54,21 @@ export default {
     font-family: 'mono';
     font-size: 40px;
     .aRunner {
-    position:relative;
+        position: relative;
+        display: block;
+        width: 49.5vw;
         span {
             display: inline-block;
-            position:absolute;
+            position: absolute;
         }
-        display: block;
-        height: 60px;
-        width: 49.5vw;
         span:nth-of-type(1) {
             width: ~"calc(@{bibWidth} - 5px)";
             display: inline-block;
             text-align: left;
-            padding-left:5px;
+            padding-left: 5px;
         }
         span:nth-of-type(2) {
-            left:@bibWidth;
+            left: @bibWidth;
             width: ~"calc(50vw - @{bibWidth})";
             text-overflow: ellipsis;
             overflow: hidden;
