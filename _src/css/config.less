@@ -1,0 +1,22 @@
+@bgColor: #e8e8e8;
+@navColor: #bbb;
+@navHeight: 60px;
+@lineHeight: 46px;
+@menuWidth: 30%;
+@menuMinWidth: 250px;
+@menuMinWidthTrigg: 834px;
+@successCol: #3c763d;
+@warningCol: #8a6d3b;
+@errorCol: #a94442;
+@transitionDuration: 0.5s;
+
+.contentPane {
+  position: absolute;
+  top: @navHeight;
+  .h100nonav;
+  width: 100vw;
+}
+
+.h100nonav {
+  height: ~"calc(100vh - @{navHeight})";
+}
