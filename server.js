@@ -112,11 +112,19 @@ port.on('data', function (data) {
   for (var i in cmd) {
     var aCmd = cmd[i];
     if (chkSum(aCmd.slice(0, aCmd.length - 1)) == aCmd[aCmd.length - 1]) {
-      if (aCmd.length > 12) {
+      if (aCmd.length==21) {
         var ant = aCmd[4] % 4;
         var tag = aCmd.splice(7, 12);
+        //console.log(aCmd);
         //console.log('tag::', ant, new Buffer(tag).readUInt32BE(8));
         notiTag((new Buffer(tag).readUInt32BE(8)) % 3200);
+      }
+      if(aCmd.length==11){
+        var tag;
+        tag=('00'+aCmd[7].toString(16)).split('').splice(-2).join('');
+        tag+=('00'+aCmd[8].toString(16)).split('').splice(-2).join('');
+        tag=tag*1;
+        notiTag(tag);
       }
       if (aCmd.length == 12) {
         writeFastSwitchCmd();
