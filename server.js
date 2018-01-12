@@ -30,7 +30,6 @@ redisClient.get('rubbib:lastUpdate', function (err, tStamp) {
     redisClient.set('rubbib:lastUpdate', 0, 'EX', rubbibExpire);
   }
   lastUpdate = tStamp * 1;
-  lastUpdate=1;
   getNewData();
 });
 
