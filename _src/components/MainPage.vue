@@ -44,7 +44,10 @@ export default {
     font-family: 'mono';
     src: url("./../css/mono.ttf");
 }
+body{
+}
 #mainPage {
+  height:100vh;
     color: @txtColor;
     column-count: 2;
     column-gap: 1vw;

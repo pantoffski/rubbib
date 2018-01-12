@@ -34,10 +34,12 @@ redisClient.get('rubbib:lastUpdate', function (err, tStamp) {
 });
 
 function notiTag(tagId) {
+  //console.log('noti '+tagId);
   redisClient.get('rubbib:' + tagId, function (err, runner) {
     if (err) return false;
     if (typeof runner == 'undefined' || !runner) return false;
     runner = JSON.parse(runner);
+    //console.log('emitting');
     io.emit('runner', {
       name: runner.name,
       bibNo: runner.bibNo,
@@ -48,10 +50,10 @@ function notiTag(tagId) {
 }
 
 function getNewData() {
-  request('https://rubbibsrv.herokuapp.com/runners/' + lastUpdate, function (err, resp, body) {
+  request.post({url:'https://yattaweb.herokuapp.com/apinaja/runners/' + lastUpdate}, function (err, resp, body) {
     if (err || resp.statusCode != 200) return false;
     var data = JSON.parse(body);
-    if (data.length > 0) lastUpdate = data[0].tStamp;
+    if (data.length > 0) lastUpdate = data[0].updatedAt;
     for (var i in data) {
       var runner = {
         bibNo: data[i].bibNo,
@@ -63,7 +65,7 @@ function getNewData() {
     }
     redisClient.set('rubbib:lastUpdate', lastUpdate, 'EX', rubbibExpire);
     //console.log(data);
-    console.log('getNewData');
+    //console.log('getNewData');
   });
 }
 /***** yatta ******/
@@ -104,7 +106,7 @@ port.on('data', function (data) {
         var ant = aCmd[4] % 4;
         var tag = aCmd.splice(7, 12);
         //console.log('tag::', ant, new Buffer(tag).readUInt32BE(8));
-        notiTag((new Buffer(tag).readUInt32BE(8)) % 4000);
+        notiTag((new Buffer(tag).readUInt32BE(8)) % 3200);
       }
       if (aCmd.length == 12) {
         writeFastSwitchCmd();
