@@ -4,7 +4,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     runnersLength:24,
-    runners: []
+    runners: [{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0},{bibNo:0,bibName:'',e:'',name:'',raceCat:'',tStamp:0}]
   },
   getters: {
     tbl: (state) => {
