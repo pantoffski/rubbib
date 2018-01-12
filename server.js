@@ -30,6 +30,7 @@ redisClient.get('rubbib:lastUpdate', function (err, tStamp) {
     redisClient.set('rubbib:lastUpdate', 0, 'EX', rubbibExpire);
   }
   lastUpdate = tStamp * 1;
+  lastUpdate=1;
   getNewData();
 });
 
@@ -41,6 +42,7 @@ function notiTag(tagId) {
     runner = JSON.parse(runner);
     //console.log('emitting');
     io.emit('runner', {
+      e: runner.e,
       name: runner.name,
       bibNo: runner.bibNo,
       bibName: runner.bibName,
@@ -50,12 +52,17 @@ function notiTag(tagId) {
 }
 
 function getNewData() {
-  request.post({url:'https://yattaweb.herokuapp.com/apinaja/runners/' + lastUpdate}, function (err, resp, body) {
+  console.log('https://yattaweb.herokuapp.com/apinaja/runners/' + lastUpdate);
+  request.post({
+    url: 'https://yattaweb.herokuapp.com/apinaja/runners/' + lastUpdate
+  }, function (err, resp, body) {
     if (err || resp.statusCode != 200) return false;
     var data = JSON.parse(body);
+    console.log(data);
     if (data.length > 0) lastUpdate = data[0].updatedAt;
     for (var i in data) {
       var runner = {
+        e: data[i].e,
         bibNo: data[i].bibNo,
         bibName: data[i].bibName,
         name: data[i].name,
@@ -151,7 +158,7 @@ new CronJob({
   runOnInit: true
 });
 var newDataCron = new CronJob({
-  cronTime: '0-59/3 * * * * *',
+  cronTime: '0-59/10 * * * * *',
   onTick: function () {
     getNewData();
   },

@@ -1,7 +1,7 @@
 <template>
 <div id='mainPage'>
   <div :style='aRunnerStyle()' class='aRunner' v-for="(runner,index) in runners" :index='index'>
-    <span>{{sex(runner)}}{{bibNo(runner)}} :</span> <span> {{runner.name}}</span>
+    <span>{{runner.e==' '?'&nbsp':runner.e}}{{bibNo(runner)}} :</span> <span> {{runner.name}}</span>
   </div>
 </div>
 </template>
@@ -25,9 +25,6 @@ export default {
         'line-height': h + 'vh'
       }
     },
-    sex(runner) {
-      return runner.raceCat.slice(-1).toUpperCase()
-    },
     bibNo(runner) {
       return runner.raceCat.slice(0, 2) + '-' + ("0000" + runner.bibNo).slice(-4);
     }
@@ -44,10 +41,9 @@ export default {
     font-family: 'mono';
     src: url("./../css/mono.ttf");
 }
-body{
-}
+body {}
 #mainPage {
-  height:100vh;
+    height: 100vh;
     color: @txtColor;
     column-count: 2;
     column-gap: 1vw;
