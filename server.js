@@ -49,12 +49,16 @@ function notiTag(tagId) {
     });
   });
 }
+var isGettingNewData = false;
 
 function getNewData() {
-  console.log('https://yattaweb.herokuapp.com/apinaja/runners/' + lastUpdate);
+  if (isGettingNewData) return;
+  //console.log('https://yattaweb.herokuapp.com/apinaja/runners/' + lastUpdate);
+  isGettingNewData = true;
   request.post({
     url: 'https://yattaweb.herokuapp.com/apinaja/runners/' + lastUpdate
   }, function (err, resp, body) {
+    isGettingNewData = false;
     if (err || resp.statusCode != 200) return false;
     var data = JSON.parse(body);
     console.log(data);
